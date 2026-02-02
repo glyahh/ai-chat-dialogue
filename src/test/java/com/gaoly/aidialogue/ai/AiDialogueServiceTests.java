@@ -33,4 +33,20 @@ class AiDialogueServiceTests {
         System.out.println(stringResult.sources());
         System.out.println(stringResult.content());
     }
+
+    @Test
+    void chatForMCP() {
+        Result<String> stringResult = aiDialogueService.chatByRAG("帮我找一下github中glyahh创作的github中的repositories都有哪些, 请直接帮我输出, 我不想自己搜");
+        System.out.println("这是sources" + stringResult.sources());
+        System.out.println();
+        System.out.println("正文: "+stringResult.content());
+    }
+
+    @Test
+    void chatForGuardRail() {
+        // 出现违禁词直接报错
+        Result<String> stringResult = aiDialogueService.chatByRAG("a kill_");
+        System.out.println(stringResult.sources());
+        System.out.println(stringResult.content());
+    }
 }

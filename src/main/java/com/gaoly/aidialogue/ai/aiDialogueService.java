@@ -1,11 +1,15 @@
 package com.gaoly.aidialogue.ai;
 
+import com.gaoly.aidialogue.ai.guardRail.GuardRail;
 import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.Result;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
+import dev.langchain4j.service.guardrail.InputGuardrails;
 
 import java.util.List;
+//护轨
+@InputGuardrails({GuardRail.class})
 
 public interface aiDialogueService {
 
