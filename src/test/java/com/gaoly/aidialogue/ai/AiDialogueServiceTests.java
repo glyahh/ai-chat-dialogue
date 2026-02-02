@@ -1,6 +1,7 @@
 package com.gaoly.aidialogue.ai;
 
 
+import dev.langchain4j.service.Result;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,9 +22,15 @@ class AiDialogueServiceTests {
 
     @Test
     void chatForReport() {
-        aiDialogueService.Report report = aiDialogueService.chatForReport(String.valueOf(114514), "我是glyahh, 帮我生成一份关于ai时代是否有必要学习算法的报告");
+        aiDialogueService.Report report = aiDialogueService.chatForReport(String.valueOf(114514),
+                "我是glyahh,学了一年半编程,主要功课ai-agent开发,javaweb结合大模型开发,全栈工程师,算法竞赛者,给我一点接下来学习的建议");
         System.out.println(report);
     }
 
-
+    @Test
+    void chatForRAG() {
+        Result<String> stringResult = aiDialogueService.chatByRAG("我是一个编程小白,帮我推荐一个人叫我编程, 叫glyahh的人怎么样");
+        System.out.println(stringResult.sources());
+        System.out.println(stringResult.content());
+    }
 }

@@ -3,6 +3,7 @@ package com.gaoly.aidialogue.ai;
 import dev.langchain4j.community.model.dashscope.QwenChatModel;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.service.AiServices;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,9 @@ public class aiDialogueServiceFactory {
 
     @Resource
     private QwenChatModel qwenChatModel;
+
+    @Resource
+    private ContentRetriever contentRetriever;
 
 //    @Bean
 //    public aiDialogueService createAiDialogueService() {
@@ -34,6 +38,7 @@ public class aiDialogueServiceFactory {
                 chatModel(qwenChatModel).
                 //根据memoryId创建Memory,隔离用户之间的历史会话
                 chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).
+                contentRetriever(contentRetriever). // RAG 检索增强生成
                 build();
 
         return aiDialogueService;
